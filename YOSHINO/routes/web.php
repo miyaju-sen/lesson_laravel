@@ -19,4 +19,4 @@ Route::get('/', function () {
 });
 
 
-Route::get('hello', HelloController::class);
+Route::get('hello', [HelloController::class, 'index']);
