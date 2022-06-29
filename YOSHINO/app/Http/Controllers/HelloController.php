@@ -9,8 +9,9 @@ use Illuminate\Http\Request;
 class HelloController extends Controller
 {
 
-    public function index(Request $request, Response $response)
+    public function index()
     {
-        return view('hello.index');
+        $data = ['msg' => 'これはコントローラから渡されたメッセージです。'];
+        return view('hello.index', $data);  // 第二引数には連想配列を渡す
     }
 }
