@@ -11,7 +11,8 @@ class HelloController extends Controller
 
     public function index()
     {
-        return view('hello.index');  // 第二引数には連想配列を渡す
+        $data = ['one', 'two', 'three', 'four', 'five'];
+        return view('hello.index', ['data' => $data]);  // 第二引数には連想配列を渡す
     }
 
     public function post(Request $request) {
