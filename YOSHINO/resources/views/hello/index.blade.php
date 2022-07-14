@@ -10,10 +10,8 @@
 @section('content')
     <p>ここが本文のコンテンツです。</p>
 
-    <ul>
-        {{-- $data という変数を 'item' に入れてる --}}
-        @each('components.item', $data, 'item')
-    </ul>
+    <p>Controller value<br>'message' = {{$message}}</p>
+    <p>ViewComposer value<br>'view_message' = {{$view_message}}</p>
 @endsection
 
 @section('footer')

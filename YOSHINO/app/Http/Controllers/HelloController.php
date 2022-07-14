@@ -11,12 +11,7 @@ class HelloController extends Controller
 
     public function index()
     {
-        $data = [
-            ['name' => 'ジェイ', 'mail' => 'jay@enhypen'],
-            ['name' => 'ジェユン', 'mail' => 'jake@enhypen'],
-            ['name' => 'ソンフン', 'mail' => 'songhun@enhypen'],
-        ];
-        return view('hello.index', ['data' => $data]);  // 第二引数には連想配列を渡す
+        return view('hello.index', ['message' => 'Hello']);
     }
 
     public function post(Request $request) {
