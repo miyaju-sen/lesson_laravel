@@ -25,11 +25,7 @@ class HelloServiceProvider extends ServiceProvider
     public function boot()
     {
         View::composer (
-            'hello.index', function($view) {
-                // $view: Illuminate\View名前空間にあるViewクラスのインスタンス
-                // with: ビューに変数などを追加するためのもの
-                $view->with('view_message', 'composer message!');
-            }
+            'hello.index', 'App\Http\Composers\HelloComposer'
         );
     
     }
