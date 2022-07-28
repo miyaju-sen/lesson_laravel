@@ -16,6 +16,15 @@ class HelloMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        return $next($request);
+
+        $response = $next($request);
+        $content = $response->content();        // 送り返されるHTMLソースコードのテキストが入ってる
+
+        $pattern = '/<middleware>(.*)<\/middleware>/i';
+        $replace = '<a href="http://$1">$1</a>';
+        $content = preg_replace($pattern, $replace, $content);
+
+        $response->setContent($content);
+        return $response;
     }
 }

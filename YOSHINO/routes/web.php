@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HelloController;
+use App\Http\Middleware\HelloMiddleware;
 use Illuminate\Support\Facades\Route;
 
 /*
