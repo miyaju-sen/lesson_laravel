@@ -13,7 +13,13 @@ class HelloRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        // パスがhelloの場合にのみ利用
+        // if($this->path() == 'hello') {
+            return true;
+        // }
+        // else {
+        //     return false;
+        // }
     }
 
     /**
@@ -24,7 +30,9 @@ class HelloRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required',
+            'mail' => 'email',
+            'age' => 'numeric|between:0,150',
         ];
     }
 }
