@@ -4,34 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
+use App\Http\Requests\HelloRequest;
 
 
 class HelloController extends Controller
 {
 
-    public function index(Request $request, Response $response)
+    public function index(Request $request)
     {
-        $html = <<<EOF
-        <html>
-        <head>
-        <title>Hello/Index</title>
-        <style>
-        body { font-size:16pt; color:#999; }
-        h1 { font-size: 100pt; text-align:right; color:#eee; }
-        </style>
-        </head>
-        <body> 
-            <h1>Hello</h1>
-            <h3>Request</h3>
-            <pre>{$request}</pre>
+        return view('hello.index', ['msg' => 'フォームを入力：']);
+    }
 
-            <h3>Response</h3>
-            <pre>{$response}</pre>
-        </body>
-        </html>
-        EOF;
-
-        $response->setContent($html);
-        return $response;
+    public function post(HelloRequest $request) 
+    {
+        return view('hello.index', ['msg' => '正しく入力されました！']);
     }
 }
