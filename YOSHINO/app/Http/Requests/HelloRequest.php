@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\Myrule;
 
 class HelloRequest extends FormRequest
 {
@@ -14,12 +15,12 @@ class HelloRequest extends FormRequest
     public function authorize()
     {
         // パスがhelloの場合にのみ利用
-        // if($this->path() == 'hello') {
+        if($this->path() == 'hello') {
             return true;
-        // }
-        // else {
-        //     return false;
-        // }
+        }
+        else {
+            return false;
+        }
     }
 
     /**
@@ -32,7 +33,16 @@ class HelloRequest extends FormRequest
         return [
             'name' => 'required',
             'mail' => 'email',
-            'age' => 'numeric|between:0,150',
+            'age' => ['numeric', new Myrule(5)],
+        ];
+    }
+
+    public function messages() {
+        return [
+            'name.required' => '名前は必ず入力してください。',
+            'mail.email' => 'メールアドレスが必要です。',
+            'age.numeric' => '年齢を整数で記入ください。',
+            'age.hello' => 'Hello! 入力は偶数のみ受け付けます。',
         ];
     }
 }
