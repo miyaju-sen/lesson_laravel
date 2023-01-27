@@ -41,10 +41,9 @@ class HelloController extends Controller
 
     public function edit(Request $request) {
         // idがない場合のエラー処理は省略
-        $param = ['id' => $request->id];
-        $item = DB::select('SELECT * FROM people WHERE id = :id', $param);
+        $item = self::getData($request->id);
 
-        return view('hello.edit', ['form' => $item[0]]);
+        return view('hello.edit', ['form' => $item]);
     }
 
     public function update(Request $request) {
@@ -60,10 +59,9 @@ class HelloController extends Controller
     }
 
     public function del(Request $request) {
-        $param = ['id' => $request->id];
-        $item = DB::select('SELECT * FROM people WHERE id = :id', $param);
+        $item = self::getData($request->id);
 
-        return view('hello.del', ['form' => $item[0]]);
+        return view('hello.del', ['form' => $item]);
     }
 
     public function remove(Request $request) {
@@ -71,5 +69,11 @@ class HelloController extends Controller
         DB::delete('DELETE FROM people WHERE id = :id', $param);
 
         return redirect('/hello');
+    }
+
+    private function getData($id) {
+        $item = DB::select('SELECT * FROM people WHERE id = '.$id);
+
+        return $item[0];
     }
 }
