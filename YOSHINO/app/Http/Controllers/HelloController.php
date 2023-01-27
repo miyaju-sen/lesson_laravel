@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use App\Http\Requests\HelloRequest;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Validator;
 
 class HelloController extends Controller
@@ -54,6 +55,20 @@ class HelloController extends Controller
             'age' => $request->age,
         ];
         DB::update('UPDATE people SET name = :name, mail = :mail, age = :age WHERE id = :id', $param);
+
+        return redirect('/hello');
+    }
+
+    public function del(Request $request) {
+        $param = ['id' => $request->id];
+        $item = DB::select('SELECT * FROM people WHERE id = :id', $param);
+
+        return view('hello.del', ['form' => $item[0]]);
+    }
+
+    public function remove(Request $request) {
+        $param = ['id' => $request->id];
+        DB::delete('DELETE FROM people WHERE id = :id', $param);
 
         return redirect('/hello');
     }
