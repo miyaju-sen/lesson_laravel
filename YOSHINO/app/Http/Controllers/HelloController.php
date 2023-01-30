@@ -15,6 +15,8 @@ class HelloController extends Controller
     public function index(Request $request)
     {
         $items = DB::table('people')->get();
+        // var_dump(DB::table('people')->get(['id', 'name']));
+
         return view('hello.index', ['items' => $items]);
     }
 
@@ -69,6 +71,13 @@ class HelloController extends Controller
         DB::delete('DELETE FROM people WHERE id = :id', $param);
 
         return redirect('/hello');
+    }
+
+    public function show(Request $request) {
+        $id = $request->id;
+        $item = DB::table('people')->where('id', $id)->first();
+
+        return view('hello.show', ['item' => $item]);
     }
 
     private function getData($id) {
