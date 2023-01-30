@@ -14,7 +14,7 @@ class HelloController extends Controller
 
     public function index(Request $request)
     {
-        $items = DB::select('SELECT * FROM people');
+        $items = DB::table('people')->get();
         return view('hello.index', ['items' => $items]);
     }
 
