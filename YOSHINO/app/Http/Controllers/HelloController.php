@@ -43,19 +43,18 @@ class HelloController extends Controller
 
     public function edit(Request $request) {
         // idがない場合のエラー処理は省略
-        $item = self::getData($request->id);
+        $item = DB::table('people')->where('id', $request->id)->first();
 
         return view('hello.edit', ['form' => $item]);
     }
 
     public function update(Request $request) {
         $param = [
-            'id' => $request->id,
             'name' => $request->name,
             'mail' => $request->mail,
             'age' => $request->age,
         ];
-        DB::update('UPDATE people SET name = :name, mail = :mail, age = :age WHERE id = :id', $param);
+        DB::table('people')->where('id', $request->id)->update($param);
 
         return redirect('/hello');
     }
