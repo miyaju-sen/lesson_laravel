@@ -60,14 +60,14 @@ class HelloController extends Controller
     }
 
     public function del(Request $request) {
-        $item = self::getData($request->id);
+        $item = DB::table('people')
+            ->where('id', $request->id)->first();
 
         return view('hello.del', ['form' => $item]);
     }
 
     public function remove(Request $request) {
-        $param = ['id' => $request->id];
-        DB::delete('DELETE FROM people WHERE id = :id', $param);
+        DB::table('people')->where('id', $request->id)->delete();
 
         return redirect('/hello');
     }
