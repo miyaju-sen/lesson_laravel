@@ -10,8 +10,10 @@ class Person extends Model
 {
 
     protected static function boot() {
+        // 初期化処理
         parent::boot();
 
+        // これがすべての検索処理に適用される（本テーブルから呼び出す際の前提となる）
         static::addGlobalScope('age', function(Builder $builder) {
             $builder->where('age', '>', 20);
         });
