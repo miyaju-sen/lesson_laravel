@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Scopes\ScopePerson;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -14,9 +15,7 @@ class Person extends Model
         parent::boot();
 
         // これがすべての検索処理に適用される（本テーブルから呼び出す際の前提となる）
-        static::addGlobalScope('age', function(Builder $builder) {
-            $builder->where('age', '>', 20);
-        });
+        static::addGlobalScope(new ScopePerson);
     }
 
     public function getData() {
