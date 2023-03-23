@@ -9,11 +9,20 @@
 
 @section('content')
     <table>        
-        <tr><th>Data</th></tr>
+        <tr>
+            <th>Person</th>
+            <th>Board</th>
+        </tr>
 
         @foreach ($items as $item)
             <tr>
                 <td>{{$item->getData()}}</td>
+                <td>
+                    @if ($item->board != null)
+                        {{-- Board.phpのgetData()を呼び出してる --}}
+                        {{ $item->board->getData() }}
+                    @endif
+                </td>
             </tr>
         @endforeach
     </table>
