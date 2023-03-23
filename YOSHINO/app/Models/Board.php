@@ -16,6 +16,15 @@ class Board extends Model
     );
 
     public function getData() {
+        // !! personの中身が空なレコードがひとつでもあると、non-objectエラーになる
+        if(isset($this->person)) {
+            return $this->id.': '.$this->title.' ('.$this->person->name.')';
+        }
+        
         return $this->id.': '.$this->title;
+    }
+
+    public function person() {
+        return $this->belongsTo('App\Models\Person');
     }
 }
