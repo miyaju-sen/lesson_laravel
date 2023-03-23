@@ -44,7 +44,11 @@ class Person extends Model
         return $query->where('age', '<=', $n);
     }
 
-    public function board() {
-        return $this->hasOne('App\Models\Board');
+    // public function board() {
+    //     return $this->hasOne('App\Models\Board');
+    // }
+
+    public function boards() {
+        return $this->hasMany('App\Models\Board');
     }
 }

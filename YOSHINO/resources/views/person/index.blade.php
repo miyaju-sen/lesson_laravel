@@ -18,10 +18,21 @@
             <tr>
                 <td>{{$item->getData()}}</td>
                 <td>
-                    @if ($item->board != null)
-                        {{-- Board.phpのgetData()を呼び出してる --}}
-                        {{ $item->board->getData() }}
+                    @if ($item->boards != null)
+                        <table width="100%">
+                            {{-- ユーザひとりに対して、複数のコメントがあることを想定した場合の処理 --}}
+                            @foreach ($item->boards as $obj)
+                                <tr>
+                                    <td>{{$obj->getData()}}</td>
+                                </tr>
+                            @endforeach
+                        </table>
                     @endif
+
+                    {{-- @if ($item->board != null) --}}
+                        {{-- Board.phpのgetData()を呼び出してる --}}
+                        {{-- {{ $item->board->getData() }} --}}
+                    {{-- @endif --}}
                 </td>
             </tr>
         @endforeach
